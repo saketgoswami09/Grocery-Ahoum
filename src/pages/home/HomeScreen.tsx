@@ -1,9 +1,9 @@
-import ProductCard from "../../components/product/ProductCard";
 import { products } from "../../data/products";
 import carrot from "../../assets/icons/sw.png";
 import location from "../../assets/icons/location.png";
 import { Search } from "lucide-react";
 import SectionHeader from "../../components/product/SectionHeader";
+import ProductCarousel from "@/components/product/ProductCarousel";
 
 const HomeScreen = () => {
   return (
@@ -37,26 +37,21 @@ const HomeScreen = () => {
           </p>
         </div>
       </div>
-      {/* section header */}
-      <SectionHeader title="Exclusive Offer" />
-      {/* Products */}
-      <div className="flex gap-4 overflow-x-auto no-scrollbar px-4">
-        {products.slice(0, 4).map((product) => (
-          <div key={product.id} className="min-w-40   lg:min-w-0">
-            <ProductCard product={product} />
-          </div>
-        ))}
-      </div>
-      <SectionHeader title="Best Selling" />
+      {/* Exclusive Offer */}
       <section className="mb-8">
-        <div className="flex items-center justify-between px-5 lg:px-0 mb-4"></div>
-        <div className="flex gap-4 overflow-x-auto no-scrollbar px-4">
-          {products.slice(0, 4).map((product) => (
-            <div key={product.id} className="min-w-40   lg:min-w-0">
-              <ProductCard product={product} />
-            </div>
-          ))}
-        </div>
+        <SectionHeader title="Exclusive Offer" />
+        <ProductCarousel products={products.slice(0, 4)} />
+      </section>
+      {/*Best Selling  */}
+      <section className="mb-8">
+        <SectionHeader title="Best Selling" />
+        <ProductCarousel products={products.slice(2, 6)} />
+      </section>
+
+       {/*Best Selling  */}
+      <section className="mb-8">
+        <SectionHeader title="Groceries" />
+        <ProductCarousel products={products.slice(4, 8)} />
       </section>
     </div>
   );

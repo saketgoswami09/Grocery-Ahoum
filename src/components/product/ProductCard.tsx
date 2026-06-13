@@ -1,12 +1,15 @@
 import { Plus } from "lucide-react";
 import type { Product } from "../../types";
+import { useNavigate } from "react-router-dom";
 type ProductCardProps = {
   product: Product;
 };
 
 const ProductCard = ({ product }: ProductCardProps) => {
+  const navigate = useNavigate();
   return (
     <div
+     onClick={() => navigate(`/product/${product.id}`)}
       className="
       group
    w-[180px]
