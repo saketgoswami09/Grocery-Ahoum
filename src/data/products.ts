@@ -1,4 +1,15 @@
 import { type Product, ProductCategory } from '../types/index';
+import banana from "../assets/products/banana.png";
+import apple from "../assets/products/apple.png";
+// import ginger from "../assets/products/ginger.png";
+// import pepper from "../assets/products/pepper.png";
+
+export const productImages = {
+  banana,
+  apple,
+  // ginger,
+  // pepper,
+};
 
 export const products: Product[] = [
   // Fresh Fruits & Vegetables
@@ -8,7 +19,7 @@ export const products: Product[] = [
     description: 'Fresh organic bananas, perfect for smoothies, snacking, or baking. Sourced from certified organic farms.',
     price: 4.99,
     originalPrice: 5.99,
-    image: '/images/banana.png',
+    image: productImages.banana,
     category: ProductCategory.FRESH_FRUITS,
     unit: '7pcs, Priceg',
     quantity: 10,
@@ -29,7 +40,7 @@ export const products: Product[] = [
     description: 'Crispy and sweet red apples, great for snacking. Farm-fresh Gala apples with a naturally sweet flavor.',
     price: 4.99,
     originalPrice: 5.49,
-    image: '/images/apple.png',
+    image: productImages.apple,
     category: ProductCategory.FRESH_FRUITS,
     unit: '1kg, Priceg',
     quantity: 25,
