@@ -9,38 +9,45 @@ const ProductCard = ({ product }: ProductCardProps) => {
     <div
       className="
       group
-
+   w-[180px]
   bg-white
   border
   border-[#E2E2E2]
-rounded-[18px]  p-5
+   rounded-[18px]  p-5
   flex
   flex-col
   "
     >
-      <div className="h-36 flex items-center justify-center mb-4">
+      <div className=" h-27.5  flex items-center justify-center mb-4 overflow-hidden">
         <img
           src={product.image}
           alt={product.name}
-          className="max-h-full w-auto object-contain group-hover:scale-105 transition-transform duration-300 "
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.src = `https://placehold.co/200x150/E6F2EA/53B175?text=${encodeURIComponent(product.name)}`;
-          }}
+          className="max-h-full w-auto object-contain"
         />
       </div>
       <h3
         className="
-        text-[14px]
-        mb-5 font-bold leading-tight line-clamp-2"
+       font-semibold text-[16px] line-clamp-1"
       >
         {product.name}
-      </h3>{" "}
-      <p className="text-xs text-gray mb-3">{product.unit}</p>
+      </h3>
+      <p className="text-[14px] text-[#7C7C7C] mb-4">{product.unit}</p>
       <div className="flex items-center justify-between mt-auto">
-        <span className="text-base font-bold text-dark">${product.price}</span>
+        <span className="text-base font-bold text-dark">
+          ${product.price.toFixed(2)}
+        </span>
 
-        <button className="w-12 h-12 rounded-[17px] bg-primary text-white flex items-center justify-center">
+        <button
+          className="
+    w-12 h-12
+    rounded-[17px]
+    bg-primary
+    text-white
+    flex items-center justify-center
+    hover:scale-105
+    transition-all
+  "
+        >
           <Plus size={24} strokeWidth={2.5} />
         </button>
       </div>
