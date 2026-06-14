@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { useFavoriteStore } from '@/stores/favoriteStore';
-import { useCartStore } from '@/stores/cartStore';
-import EmptyState from '@/components/ui/EmptyState';
+import { useFavoriteStore } from '@/store/favoriteStore';
+import { useCartStore } from '@/store/cartStore';
+import EmptyState from '@/components/skeleton/EmptyState';
 
 export default function FavoritesScreen() {
   const navigate = useNavigate();

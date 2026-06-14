@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { products } from "../../data/products";
 import { ChevronLeft, Heart, Minus, Plus, Star } from "lucide-react";
 import { useCartStore } from "../../store/cartStore";
+import { useFavoriteStore } from "@/store/favoriteStore";
 
 const ProductDetailScreen = () => {
   const { productId } = useParams();
@@ -9,13 +10,16 @@ const ProductDetailScreen = () => {
 
   const addItem = useCartStore((state) => state.addItem);
 
-  const items = useCartStore((state) => state.items);
+  const toggleFavorite = useFavoriteStore((s) => s.toggleFavorite);
+  const favorites = useFavoriteStore((s) => s.favorites);
+
   const product = products.find((p) => p.id === productId);
 
   if (!product) {
     return <div>Product not found</div>;
   }
 
+  const loved = favorites.some((f) => f.id === product.id);
   return (
     <div className="p-2  pb-20 ">
       <div className="bg-gray-lightest rounded-b-3xl lg:rounded-3xl overflow-hidden lg:flex-1 lg:max-w-lg lg:sticky lg:top-24 lg:self-start">
@@ -37,7 +41,17 @@ const ProductDetailScreen = () => {
 
       <div className="flex items-center justify-between    ">
         <h1 className="text-2xl font-bold mt-6">{product.name}</h1>
-        <Heart size={22} />
+        <button
+          onClick={() => toggleFavorite(product)}
+          className="p-2 shrink-0"
+          aria-label="Toggle favorite"
+        >
+          <Heart
+            size={22}
+            fill={loved ? "#FF4D4F" : "transparent"}
+            color={loved ? "#FF4D4F" : "#181725"}
+          />
+        </button>
       </div>
       <p className="text-gray mt-1">{product.unit}</p>
 

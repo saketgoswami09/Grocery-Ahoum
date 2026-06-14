@@ -4,6 +4,7 @@ import ProductDetailScreen from "./pages/products/ProductDetailScreen";
 import CartScreen from "./pages/cart/CartScreen";
 import BottomNav from "./components/layout/BottomNav";
 import ExploreScreen from "./pages/explore/ExploreScreen";
+import FavoritesScreen from "./pages/products/FavoritesScreen";
 function App() {
   return (
     <>
@@ -12,6 +13,7 @@ function App() {
         <Route path="/product/:productId" element={<ProductDetailScreen />} />
         <Route path="/cart" element={<CartScreen />} />
         <Route path="/explore" element={<ExploreScreen />} />
+        <Route path="/favorites" element={<FavoritesScreen />} />
       </Routes>
 
       <BottomNav />
