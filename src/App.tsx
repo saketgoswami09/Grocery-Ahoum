@@ -5,6 +5,7 @@ import CartScreen from "./pages/cart/CartScreen";
 import BottomNav from "./components/layout/BottomNav";
 import ExploreScreen from "./pages/explore/ExploreScreen";
 import FavoritesScreen from "./pages/products/FavoritesScreen";
+import SearchScreen from "./pages/products/SearchScreen";
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
         <Route path="/cart" element={<CartScreen />} />
         <Route path="/explore" element={<ExploreScreen />} />
         <Route path="/favorites" element={<FavoritesScreen />} />
+        <Route path="/search" element={<SearchScreen />} />
       </Routes>
 
       <BottomNav />
