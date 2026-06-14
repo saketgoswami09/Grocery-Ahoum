@@ -6,6 +6,7 @@ import BottomNav from "./components/layout/BottomNav";
 import ExploreScreen from "./pages/explore/ExploreScreen";
 import FavoritesScreen from "./pages/products/FavoritesScreen";
 import SearchScreen from "./pages/products/SearchScreen";
+import FiltersScreen from "./pages/explore/FiltersScreen";
 function App() {
   return (
     <>
@@ -16,6 +17,7 @@ function App() {
         <Route path="/explore" element={<ExploreScreen />} />
         <Route path="/favorites" element={<FavoritesScreen />} />
         <Route path="/search" element={<SearchScreen />} />
+        <Route path="/filters" element={<FiltersScreen />} />
       </Routes>
 
       <BottomNav />

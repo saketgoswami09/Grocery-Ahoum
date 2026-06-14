@@ -21,6 +21,7 @@ export default function SearchScreen() {
 
   useEffect(() => {
     if (!debouncedQuery.trim()) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setResults([]);
       return;
     }
@@ -63,7 +64,7 @@ export default function SearchScreen() {
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search products..."
               autoFocus
-              className="w-full bg-gray-lightest rounded-[var(--radius-md)] pl-11 pr-4 py-3 text-sm text-dark placeholder:text-gray-light outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+              className="w-full bg-gray-lightest rounded-md pl-11 pr-4 py-3 text-sm text-dark placeholder:text-gray-light outline-none focus:ring-2 focus:ring-primary/30 transition-all"
             />
             {query && (
               <button

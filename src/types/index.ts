@@ -87,6 +87,7 @@ export interface Order {
 
 export interface FilterState {
   categories: ProductCategory[];
+  brands: string[];
   priceRange: [number, number];
   isOrganic: boolean;
   sortBy: 'popular' | 'price_low' | 'price_high' | 'rating';
