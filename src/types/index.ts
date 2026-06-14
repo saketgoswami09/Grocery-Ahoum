@@ -1,23 +1,23 @@
-/* ===== Enums ===== */
+import type { ReactNode } from "react";
 
 export enum ProductCategory {
-  FRESH_FRUITS = 'fresh_fruits',
-  FRESH_VEGETABLES = 'fresh_vegetables',
-  COOKING_OIL = 'cooking_oil',
-  MEAT_FISH = 'meat_fish',
-  BAKERY = 'bakery',
-  DAIRY_EGGS = 'dairy_eggs',
-  BEVERAGES = 'beverages',
-  SNACKS = 'snacks',
+  FRESH_FRUITS = "fresh_fruits",
+  FRESH_VEGETABLES = "fresh_vegetables",
+  COOKING_OIL = "cooking_oil",
+  MEAT_FISH = "meat_fish",
+  BAKERY = "bakery",
+  DAIRY_EGGS = "dairy_eggs",
+  BEVERAGES = "beverages",
+  SNACKS = "snacks",
 }
 
 export enum OrderStatus {
-  PENDING = 'pending',
-  PROCESSING = 'processing',
-  SHIPPED = 'shipped',
-  DELIVERED = 'delivered',
-  CANCELLED = 'cancelled',
-  FAILED = 'failed',
+  PENDING = "pending",
+  PROCESSING = "processing",
+  SHIPPED = "shipped",
+  DELIVERED = "delivered",
+  CANCELLED = "cancelled",
+  FAILED = "failed",
 }
 
 /* ===== Interfaces ===== */
@@ -86,11 +86,11 @@ export interface Order {
 }
 
 export interface FilterState {
-  categories: ProductCategory[];
+  categories: string[]; // Or whatever your category type is
   brands: string[];
   priceRange: [number, number];
   isOrganic: boolean;
-  sortBy: 'popular' | 'price_low' | 'price_high' | 'rating';
+  sortBy: "popular" | "price_low" | "price_high" | "rating";
 }
 
 export interface LocationOption {
@@ -98,4 +98,9 @@ export interface LocationOption {
   zone: string;
   area: string;
   city: string;
+}
+export interface EmptyStateProps {
+  icon: ReactNode;
+  title: string;
+  description: string;
 }

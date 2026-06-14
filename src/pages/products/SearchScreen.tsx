@@ -6,7 +6,7 @@ import ProductCard from "@/components/product/ProductCard";
 import EmptyState from "@/components/skeleton/EmptyState";
 import Skeleton from "@/components/skeleton/Skeleton";
 import filter from "@/assets/icons/filter.svg";
-import { ChevronLeft, CircleX,  Search, Smile } from "lucide-react";
+import { ChevronLeft, CircleX, Search } from "lucide-react";
 
 export default function SearchScreen() {
   const navigate = useNavigate();
@@ -92,13 +92,13 @@ export default function SearchScreen() {
           </div>
         ) : !debouncedQuery.trim() ? (
           <EmptyState
-            icon={<Search />}
+            icon=""
             title="Search for products"
             description="Type something to find fresh groceries"
           />
         ) : results.length === 0 ? (
           <EmptyState
-            icon={<Smile />}
+            icon=""
             title="No results found"
             description={`We couldn't find anything for "${debouncedQuery}"`}
             actionLabel="Browse All"

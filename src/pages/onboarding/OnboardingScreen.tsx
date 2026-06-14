@@ -19,6 +19,40 @@ export default function OnboardingScreen() {
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
+  useGSAP(
+    () => {
+      gsap
+        .timeline()
+        .from(
+          imageRef.current,
+          { scale: 1.08, duration: 1.4, ease: "power2.out" },
+          0,
+        )
+        .from(overlayRef.current, { opacity: 0, duration: 0.8 }, 0)
+        .from(
+          iconRef.current,
+          { opacity: 0, y: 12, duration: 0.5, ease: "power3.out" },
+          0.25,
+        )
+        .from(
+          [line1Ref.current, line2Ref.current],
+          { yPercent: 100, duration: 0.7, stagger: 0.08, ease: "power4.out" },
+          0.35,
+        )
+        .from(
+          subtitleRef.current,
+          { opacity: 0, y: 10, duration: 0.5, ease: "power3.out" },
+          0.7,
+        )
+        .from(
+          buttonRef.current,
+          { opacity: 0, y: 16, duration: 0.5, ease: "power3.out" },
+          0.8,
+        );
+    },
+    { scope: containerRef },
+  );
+
   const handleGetStarted = () => {
     completeOnboarding();
     navigate("/signin", { replace: true });

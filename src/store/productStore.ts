@@ -26,6 +26,7 @@ interface ProductState {
 
 const defaultFilters: FilterState = {
   categories: [],
+  brands: [],
   priceRange: [0, 50],
   isOrganic: false,
   sortBy: 'popular',
