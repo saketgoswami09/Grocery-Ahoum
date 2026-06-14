@@ -7,6 +7,8 @@ import ExploreScreen from "./pages/explore/ExploreScreen";
 import FavoritesScreen from "./pages/products/FavoritesScreen";
 import SearchScreen from "./pages/products/SearchScreen";
 import FiltersScreen from "./pages/explore/FiltersScreen";
+import OrderSuccessScreen from "./pages/products/OrderSuccessScreen";
+import OrderFailedScreen from "./pages/products/OrderFailedScreen";
 function App() {
   return (
     <>
@@ -18,6 +20,9 @@ function App() {
         <Route path="/favorites" element={<FavoritesScreen />} />
         <Route path="/search" element={<SearchScreen />} />
         <Route path="/filters" element={<FiltersScreen />} />
+        <Route path="/order-success" element={<OrderSuccessScreen />} />
+
+        <Route path="/order-failed" element={<OrderFailedScreen />} />
       </Routes>
 
       <BottomNav />

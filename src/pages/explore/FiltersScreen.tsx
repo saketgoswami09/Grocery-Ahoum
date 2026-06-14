@@ -96,7 +96,7 @@ export default function FiltersScreen() {
   };
 
   return (
-    <div className="min-h-screen min-h-[100dvh] bg-gray-lightest flex flex-col">
+    <div className="min-h-screen bg-gray-lightest flex flex-col">
       {/* ─── Header ─── */}
       <div className="px-5 pt-6 pb-4 flex items-center max-w-lg mx-auto w-full">
         <button
@@ -110,11 +110,11 @@ export default function FiltersScreen() {
           Filters
         </h1>
         {/* Invisible spacer to center the title */}
-        <div className="w-[34px]" />
+        <div className="w-8.5" />
       </div>
 
       {/* ─── Filter Card ─── */}
-      <div className="flex-1 mx-4 mb-4 bg-white rounded-t-[var(--radius-xl)] px-6 pt-6 pb-28 max-w-lg lg:mx-auto lg:w-full overflow-y-auto">
+      <div className="flex-1 mx-4 mb-4 bg-white rounded-t-(--radius-xl) px-6 pt-6 pb-28 max-w-lg lg:mx-auto lg:w-full overflow-y-auto">
         {/* Categories Section */}
         <section className="mb-8">
           <h2 className="text-lg font-bold text-dark mb-3">Categories</h2>
@@ -147,10 +147,10 @@ export default function FiltersScreen() {
       </div>
 
       {/* ─── Apply Button (pinned to bottom) ─── */}
-      <div className="fixed bottom-0 left-0 right-0 px-5 pb-8 pt-4 bg-gradient-to-t from-white via-white/95 to-transparent max-w-lg mx-auto">
+      <div className="fixed bottom-0 left-0 right-0 px-5 pb-8 pt-4 bg-linear-to-t from-white via-white/95 to-transparent max-w-lg mx-auto">
         <button
           onClick={handleApply}
-          className="w-full bg-primary text-white text-base font-bold py-4 rounded-[var(--radius-lg)] hover:bg-primary-dark active:scale-[0.98] transition-all duration-200 shadow-button"
+          className="w-full bg-primary text-white text-base font-bold py-4 rounded-lg hover:bg-primary-dark active:scale-[0.98] transition-all duration-200 shadow-button"
         >
           Apply Filter
         </button>
