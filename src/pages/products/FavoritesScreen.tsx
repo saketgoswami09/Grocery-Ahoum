@@ -62,7 +62,7 @@ export default function FavoritesScreen() {
 
         <button
           onClick={handleAddAllToCart}
-          className="w-full bg-primary text-white font-semibold py-4 rounded-[var(--radius-lg)] hover:bg-primary-dark transition-colors shadow-button mt-6 max-w-lg mx-auto block"
+          className="w-full bg-primary text-white font-semibold py-4 rounded-lg hover:bg-primary-dark transition-colors shadow-button mt-6 max-w-lg mx-auto block"
         >
           Add All To Cart
         </button>

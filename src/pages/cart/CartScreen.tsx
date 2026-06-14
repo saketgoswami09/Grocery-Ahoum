@@ -93,7 +93,7 @@ export default function CartScreen() {
 
             <button
               onClick={() => setShowCheckout(true)}
-              className="w-full bg-primary text-white font-semibold py-4 rounded-[var(--radius-lg)] hover:bg-primary-dark active:scale-[0.98] transition-all shadow-button flex items-center justify-center gap-3 mt-4 lg:mt-0"
+              className="w-full bg-primary text-white font-semibold py-4 rounded-lg hover:bg-primary-dark active:scale-[0.98] transition-all shadow-button flex items-center justify-center gap-3 mt-4 lg:mt-0"
               id="go-to-checkout-btn"
             >
               Go to Checkout

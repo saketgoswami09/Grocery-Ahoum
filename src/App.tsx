@@ -9,11 +9,17 @@ import SearchScreen from "./pages/products/SearchScreen";
 import FiltersScreen from "./pages/explore/FiltersScreen";
 import OrderSuccessScreen from "./pages/products/OrderSuccessScreen";
 import OrderFailedScreen from "./pages/products/OrderFailedScreen";
+import SplashScreen from "./pages/onboarding/SplashScreen";
+import OnboardingScreen from "./pages/onboarding/OnboardingScreen";
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<HomeScreen />} />
+        <Route path="/" element={<SplashScreen />} />
+        <Route path="/onboarding" element={<OnboardingScreen />} />
+
+        
+        <Route path="/home" element={<HomeScreen />} />
         <Route path="/product/:productId" element={<ProductDetailScreen />} />
         <Route path="/cart" element={<CartScreen />} />
         <Route path="/explore" element={<ExploreScreen />} />

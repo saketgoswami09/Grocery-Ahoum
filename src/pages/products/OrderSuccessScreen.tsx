@@ -19,7 +19,7 @@ export default function OrderSuccessScreen() {
       </p>
 
       <button
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/home")}
         className="w-full bg-primary text-white py-4 rounded-xl"
       >
         Continue Shopping

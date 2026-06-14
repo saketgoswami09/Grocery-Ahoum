@@ -7,6 +7,7 @@ export default function BottomNav() {
 
   // Don't show on auth/onboarding pages
   const hideOnRoutes = [
+    "/",
     "/filters",
     "/onboarding",
     "/login",
@@ -18,7 +19,7 @@ export default function BottomNav() {
 
   const navItems = [
     {
-      to: "/",
+      to: "/home",
       label: "Shop",
       icon: () => <Home />,
     },
