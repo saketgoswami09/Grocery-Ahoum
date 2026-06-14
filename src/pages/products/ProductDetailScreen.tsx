@@ -1,11 +1,15 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { products } from "../../data/products";
 import { ChevronLeft, Heart, Minus, Plus, Star } from "lucide-react";
+import { useCartStore } from "../../store/cartStore";
 
 const ProductDetailScreen = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
 
+  const addItem = useCartStore((state) => state.addItem);
+
+  const items = useCartStore((state) => state.items);
   const product = products.find((p) => p.id === productId);
 
   if (!product) {
@@ -13,7 +17,7 @@ const ProductDetailScreen = () => {
   }
 
   return (
-    <div className="p-2">
+    <div className="p-2  pb-20 ">
       <div className="bg-gray-lightest rounded-b-3xl lg:rounded-3xl overflow-hidden lg:flex-1 lg:max-w-lg lg:sticky lg:top-24 lg:self-start">
         <div className="absolute top-5 left-5">
           <button onClick={() => navigate(-1)}>
@@ -64,7 +68,6 @@ const ProductDetailScreen = () => {
         <p className="text-sm text-gray leading-relaxed">
           {product.description}
         </p>
-        
       </div>
       <hr className="my-4 border-[#E2E2E2]" />
 
@@ -101,6 +104,10 @@ const ProductDetailScreen = () => {
     rounded-lg
     mt-8
   "
+        onClick={() => {
+          addItem(product);
+          navigate("/cart");
+        }}
       >
         Add To Basket
       </button>
