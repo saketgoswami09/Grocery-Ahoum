@@ -2,20 +2,20 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useCartStore } from "@/store/cartStore";
 import { Home, Search, ShoppingCart, Heart, User } from "lucide-react";
 
-// Define a type for the navigation items to keep TypeScript happy
 interface NavItem {
   to: string;
   label: string;
-  icon: (active: boolean) => React.ReactNode;
+  // Adjusted callback signature so classes can be injected cleanly
+  icon: (className: string) => React.ReactNode;
 }
 
 export default function BottomNav() {
   const location = useLocation();
-  // Ensure your Zustand store returns a number (fallback to 0 if undefined)
   const itemCount = useCartStore((s) => s.getItemCount?.() ?? 0);
 
-  // Don't show on auth/onboarding pages
   const hideOnRoutes = [
+    "/number",
+    "/signin",
     "/",
     "/filters",
     "/onboarding",
@@ -24,82 +24,77 @@ export default function BottomNav() {
     "/otp",
     "/location",
   ];
-  
+
   if (hideOnRoutes.includes(location.pathname)) return null;
 
   const navItems: NavItem[] = [
     {
       to: "/home",
       label: "Shop",
-      // Pass the active state to dynamically style the icon colors/fills
-      icon: (active) => (
-        <Home className={active ? "text-primary" : "text-dark"} />
-      ),
+      icon: (cls) => <Home className={cls} />,
     },
     {
       to: "/explore",
       label: "Explore",
-      icon: (active) => (
-        <Search className={active ? "text-primary" : "text-dark"} />
-      ),
+      icon: (cls) => <Search className={cls} />,
     },
     {
       to: "/cart",
       label: "Cart",
-      icon: (active) => (
-        <ShoppingCart className={active ? "text-primary" : "text-dark"} />
-      ),
+      icon: (cls) => <ShoppingCart className={cls} />,
     },
     {
       to: "/favorites",
       label: "Favourite",
-      icon: (active) => (
-        <Heart className={active ? "text-primary fill-primary" : "text-dark"} />
+      icon: (cls) => (
+        <Heart className={`${cls} ${cls.includes("text-primary") ? "fill-primary" : ""}`} />
       ),
     },
     {
       to: "/account",
       label: "Account",
-      icon: (active) => (
-        <User className={active ? "text-primary" : "text-dark"} />
-      ),
+      icon: (cls) => <User className={cls} />,
     },
   ];
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-white shadow-nav z-50 lg:hidden safe-area-bottom">
       <div className="flex items-center justify-around h-16 max-w-lg mx-auto px-4">
-        {navItems.map((item) => {
-          // Check if current path matches item route
-          const isActive = location.pathname.startsWith(item.to);
-          
-          return (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              className="flex flex-col items-center gap-0.5 py-1 relative"
-              aria-label={item.label}
-            >
-              <div className="relative">
-                {/* Fixed: Pass the standard isActive boolean here */}
-                {item.icon(isActive)}
-                
-                {item.to === "/cart" && itemCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-primary text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                    {itemCount > 9 ? "9+" : itemCount}
+        {navItems.map((item) => (
+          <NavLink
+            key={item.to}
+            to={item.to}
+            // Leverage React Router's built-in isActive callback state
+            className={({ isActive }) => 
+              `flex flex-col items-center gap-0.5 py-1 relative w-full ${
+                isActive ? "text-primary" : "text-dark"
+              }`
+            }
+            aria-label={item.label}
+          >
+            {/* The render prop signature context automatically updates classes */}
+            {({ isActive }) => {
+              const iconClass = isActive ? "text-primary" : "text-dark";
+              
+              return (
+                <>
+                  <div className="relative">
+                    {item.icon(iconClass)}
+
+                    {item.to === "/cart" && itemCount > 0 && (
+                      <span className="absolute -top-2 -right-2 bg-primary text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                        {itemCount > 9 ? "9+" : itemCount}
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-[10px] font-semibold transition-colors">
+                    {item.label}
                   </span>
-                )}
-              </div>
-              <span
-                className={`text-[10px] font-semibold transition-colors ${
-                  isActive ? "text-primary" : "text-dark"
-                }`}
-              >
-                {item.label}
-              </span>
-            </NavLink>
-          );
-        })}
+                </>
+              );
+            }}
+          </NavLink>
+        ))}
       </div>
     </nav>
   );

@@ -12,8 +12,8 @@ interface AuthState {
   onboardingComplete: boolean;
 
   // Actions
-  login: (email: string, password: string) => Promise<boolean>;
-  signup: (name: string, email: string, phone: string, password: string) => Promise<boolean>;
+  login: (email: string, password?: string) => Promise<boolean>;
+  signup: (name: string, email: string, phone: string, password?: string) => Promise<boolean>;
   sendOtp: (phone: string) => Promise<boolean>;
   verifyOtp: (otp: string) => Promise<boolean>;
   logout: () => void;
@@ -21,6 +21,24 @@ interface AuthState {
   updateAddress: (address: Address) => void;
   completeOnboarding: () => void;
 }
+
+// Reusable mock profile factory so both Login and OTP validation paths generate complete datasets
+const createMockUser = (overrides: Partial<User> = {}): User => ({
+  id: overrides.id || 'u1',
+  name: overrides.name || 'Saket',
+  email: overrides.email || 'user@nectar.app',
+  phone: overrides.phone || '+8801700000000',
+  avatar: '/images/avatar.png',
+  address: {
+    id: 'addr1',
+    label: 'Home',
+    street: 'Block B, Banasree',
+    city: 'Dhaka',
+    state: 'Dhaka Division',
+    zipCode: '1219',
+    isDefault: true,
+  },
+});
 
 export const useAuthStore = create<AuthState>()(
   persist(
@@ -33,44 +51,29 @@ export const useAuthStore = create<AuthState>()(
       selectedLocation: null,
       onboardingComplete: false,
 
-      login: async (email: string) => {
+      login: async (email: string, _password?: string) => {
         set({ isLoading: true });
-        // Simulate API call
         return new Promise<boolean>((resolve) => {
           setTimeout(() => {
-            const user: User = {
-              id: 'u1',
-              name: 'Saket',
-              email,
-              phone: '+8801700000000',
-              avatar: '/images/avatar.png',
-              address: {
-                id: 'addr1',
-                label: 'Home',
-                street: 'Block B, Banasree',
-                city: 'Dhaka',
-                state: 'Dhaka Division',
-                zipCode: '1219',
-                isDefault: true,
-              },
-            };
+            const user = createMockUser({ email });
             set({ user, isAuthenticated: true, isLoading: false });
             resolve(true);
           }, 1200);
         });
       },
 
-      signup: async (name: string, email: string, phone: string) => {
+      signup: async (name: string, email: string, phone: string, _password?: string) => {
         set({ isLoading: true });
         return new Promise<boolean>((resolve) => {
           setTimeout(() => {
-            const user: User = {
+            // Stage the user data collected from NumberScreen
+            const stagedUser: User = {
               id: 'u1',
               name,
               email,
               phone,
             };
-            set({ user, isLoading: false });
+            set({ user: stagedUser, isLoading: false });
             resolve(true);
           }, 1200);
         });
@@ -91,7 +94,21 @@ export const useAuthStore = create<AuthState>()(
         return new Promise<boolean>((resolve) => {
           setTimeout(() => {
             if (otp.length === 4) {
-              set({ otpVerified: true, isAuthenticated: true, isLoading: false });
+              set((state) => {
+                // Fix: Hydrate the staged signup user with full profile defaults/avatars on success
+                const completedUser = createMockUser({
+                  name: state.user?.name,
+                  email: state.user?.email,
+                  phone: state.user?.phone,
+                });
+
+                return {
+                  user: completedUser,
+                  otpVerified: true,
+                  isAuthenticated: true,
+                  isLoading: false,
+                };
+              });
               resolve(true);
             } else {
               set({ isLoading: false });
@@ -107,6 +124,7 @@ export const useAuthStore = create<AuthState>()(
           isAuthenticated: false,
           otpSent: false,
           otpVerified: false,
+          // Note: keeping onboardingComplete intact so they don't see splash sliders again
         });
       },
 
@@ -126,7 +144,7 @@ export const useAuthStore = create<AuthState>()(
     }),
     {
       name: 'nectar-auth',
-      partialize: (state) => ({
+      partialize: (state: AuthState) => ({
         user: state.user,
         isAuthenticated: state.isAuthenticated,
         selectedLocation: state.selectedLocation,
