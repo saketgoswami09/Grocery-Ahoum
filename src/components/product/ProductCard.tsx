@@ -12,11 +12,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
      onClick={() => navigate(`/product/${product.id}`)}
       className="
       group
-   w-[180px]
+   w-45
   bg-white
   border
   border-[#E2E2E2]
-   rounded-[18px]  p-5
+   rounded-lg  p-5
   flex
   flex-col
   "

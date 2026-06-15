@@ -15,6 +15,12 @@ import carrot from "../../assets/icons/sw.png";
 import location from "../../assets/icons/location.png";
 import bannerBag from "../../assets/2771 1.png";
 
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
 export default function HomeScreen() {
   const navigate = useNavigate();
   const {
@@ -27,6 +33,7 @@ export default function HomeScreen() {
   const selectedLocation = useAuthStore((s) => s.selectedLocation);
 
   const catScrollRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
 
@@ -66,6 +73,29 @@ export default function HomeScreen() {
 
   const [activeSlide] = useState(0);
 
+  // Scroll-reveal animation for product cards
+  useGSAP(
+    () => {
+      if (isLoading) return;
+
+      ScrollTrigger.batch(".product-card-anim", {
+        scroller: scrollContainerRef.current,
+        start: "top 92%",
+        once: true,
+        onEnter: (batch) =>
+          gsap.from(batch, {
+            opacity: 0,
+            y: 24,
+            duration: 0.5,
+            stagger: 0.08,
+            ease: "power3.out",
+            overwrite: true,
+          }),
+      });
+    },
+    { dependencies: [isLoading, exclusiveOffers, bestSelling], scope: scrollContainerRef }
+  );
+
   return (
     /* Fix 1: Locked global view canvas boundary container */
     <div className="h-screen w-screen overflow-hidden bg-background lg:flex lg:items-stretch">
@@ -81,7 +111,10 @@ export default function HomeScreen() {
         <DesktopHeader />
 
         {/* Dynamic Inner Scroll Body */}
-        <div className="flex-1 overflow-y-auto pb-20 lg:pb-6 no-scrollbar">
+        <div
+          ref={scrollContainerRef}
+          className="flex-1 overflow-y-auto pb-20 lg:pb-6 no-scrollbar"
+        >
           {/* MOBILE ONLY: Top Brand Location bar */}
           <div className="lg:hidden px-5 pt-6 pb-4">
             <div className="flex items-center justify-center gap-1 mb-1">
@@ -259,7 +292,10 @@ export default function HomeScreen() {
               ) : (
                 <div className="flex gap-4 px-5 lg:px-0 overflow-x-auto no-scrollbar lg:grid lg:grid-cols-4 xl:grid-cols-5">
                   {exclusiveOffers.map((product) => (
-                    <div key={product.id} className="min-w-[160px] lg:min-w-0">
+                    <div
+                      key={product.id}
+                      className="product-card-anim min-w-[160px] lg:min-w-0"
+                    >
                       <ProductCard product={product} />
                     </div>
                   ))}
@@ -292,7 +328,10 @@ export default function HomeScreen() {
               ) : (
                 <div className="flex gap-4 px-5 lg:px-0 overflow-x-auto no-scrollbar lg:grid lg:grid-cols-4 xl:grid-cols-5">
                   {bestSelling.slice(0, 5).map((product) => (
-                    <div key={product.id} className="min-w-[160px] lg:min-w-0">
+                    <div
+                      key={product.id}
+                      className="product-card-anim min-w-[160px] lg:min-w-0"
+                    >
                       <ProductCard product={product} />
                     </div>
                   ))}
