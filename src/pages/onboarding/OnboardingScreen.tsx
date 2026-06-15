@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/store/authStore";
-import { Carrot } from "lucide-react";
 import herobg from "@/assets/icons/HERO.png";
 
 export default function OnboardingScreen() {
