@@ -26,7 +26,7 @@ export default function SignupScreen() {
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <div className="relative h-44 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-primary/3 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-br from-primary/8 via-primary/3 to-transparent" />
         <div className="absolute -top-6 -left-8 w-32 h-32 rounded-full bg-primary/10 blur-xl" />
         <div className="absolute bottom-6 right-8 w-18 h-18 rounded-full bg-secondary/10 blur-lg" />
         <div className="absolute bottom-5 left-1/2 -translate-x-1/2">

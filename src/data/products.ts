@@ -4,11 +4,42 @@ import apple from "../assets/products/apple.png";
 import ginger from "../assets/products/ginger.png";
 import pepper from "../assets/products/BellPepper.png";
 
+import cancook from "../assets/products/cancoke.png";
+import coke from "../assets/products/coke.png";
+import sprite from "../assets/products/sprite.png";
+import pepsi from "../assets/products/pepsi can.png";
+
+import eggs from "../assets/products/eggs.png";
+import eggpasta from "../assets/products/eggpasta.png";
+import eggnooddle from "../assets/products/eggnooddle.png";
+import eddnoddle2 from "../assets/products/eddnoddle2.png";
+
+import orangeJuice from "../assets/products/orangeJuice.png";
+import appleJuice from "../assets/products/appleJuice.png";
+
+import mayonnaise from "../assets/products/American-Garden-Mayonnaise-Eggless-473ml 2.png";
+import whiteEdd from "../assets/products/whiteedd.png";
 export const productImages = {
   banana,
   apple,
   ginger,
   pepper,
+
+  cancook,
+  coke,
+  sprite,
+  pepsi,
+
+  eggs,
+  eggpasta,
+  eggnooddle,
+  eddnoddle2,
+
+  orangeJuice,
+  appleJuice,
+
+  mayonnaise,
+  whiteEdd,
 };
 
 export const products: Product[] = [
